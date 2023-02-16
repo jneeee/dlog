@@ -1,7 +1,8 @@
-from flask import Blueprint, request, render_template, flash
+from flask import Blueprint, request, render_template, flash, \
+    abort, session
 
 from detautils.utils import login_required
-from bluep.object.post import Post
+from views.object.post import Post
 
 bp_post = Blueprint('post', __name__, url_prefix="/post")
 
@@ -11,7 +12,10 @@ def post():
     if request.method =='GET':
         return render_template('post.html')
     elif request.method == 'POST':
-        flash(f'form: {request.form}')
+        ins = Post(request.form,
+                   author_name=session.get('username'))
+        ins.save()
+        flash(f'Create post success: {ins.key}')
         return render_template('post.html')
 
 @bp_post.route("/<post_id>", methods=["GET"])
@@ -19,4 +23,4 @@ def post_detail(post_id):
     try:
         Post.get_post_info_by_key(post_id)
     except ValueError:
-        
+        abort(404)

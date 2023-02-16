@@ -5,4 +5,9 @@ micros:
   - name: deta
     src: ./src
     engine: python3.9
-    primary: true
+    primary: false
+    presets:
+      env:
+        - name: FLASK_DEBUG
+          description: Enable flask debug mod
+          default: "True"

@@ -1,7 +1,7 @@
 from flask import Blueprint, request, flash, redirect, url_for, \
     render_template, session
 
-from bluep.object.user import User
+from views.object.user import User
 
 
 bp_user = Blueprint('user', __name__, url_prefix="/user")
