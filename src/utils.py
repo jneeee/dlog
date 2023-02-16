@@ -1,7 +1,7 @@
 import functools
 from threading import Thread
 
-from flask import g, redirect, url_for, session
+from flask import redirect, url_for, session
 from deta import Deta
 
 
@@ -10,7 +10,7 @@ db = deta.Base('dreamlog')
 
 def async_exc(func):
     def wrap(*args, **kwargs):
-        Thread(func, *args, **kwargs).start()
+        Thread(target=func, args=args, kwargs=kwargs).start()
 
     return wrap
 

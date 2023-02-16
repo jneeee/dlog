@@ -17,7 +17,7 @@ def login():
             flash(f"登录成功 {form.get('username')}")
         else:
             flash(f"登录失败 {form.get('username')}")
-        return render_template('index')
+        return redirect(url_for('index'))
 
 @bp_user.route("/register", methods=["GET", 'POST'])
 def register():

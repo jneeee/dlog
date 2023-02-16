@@ -7,7 +7,7 @@ User in DB:
         last_login_time: xxxx
     }
 '''
-from detautils.utils import db
+from utils import db
 
 
 class User:
@@ -33,7 +33,8 @@ class User:
 
     @staticmethod
     def check_login_valid(info):
-        user_info = db.get(info.get('username'))
+        key = 'user_%s' % info.get('username')
+        user_info = db.get(key)
         if info.get('password') == user_info.get('password'):
             return True
         else:

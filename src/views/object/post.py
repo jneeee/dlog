@@ -12,7 +12,7 @@ User in DB:
 import markdown
 from random import randint
 
-from detautils.utils import db, async_exc
+from utils import db, async_exc
 
 class Post:
 

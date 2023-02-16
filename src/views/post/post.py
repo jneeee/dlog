@@ -1,7 +1,7 @@
 from flask import Blueprint, request, render_template, flash, \
     abort, session
 
-from detautils.utils import login_required
+from utils import login_required
 from views.object.post import Post
 
 bp_post = Blueprint('post', __name__, url_prefix="/post")
