@@ -62,5 +62,11 @@ class Post:
     @staticmethod
     def fetch_posts(limit=10, last=None):
         filte = {'key?pfx': 'post_'}
-        res = db.fetch(filte, limit=limit)
+        res = db.fetch(filte, limit=limit, last=last)
+        return res
+
+    @staticmethod
+    def fetch_by_tag(tag, limit=1000, last=None):
+        filte = {'prop.tags?contains': tag}
+        res = db.fetch(filte, limit=limit, last=last)
         return res
