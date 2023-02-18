@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="pure-g">
+    <div class="l-box pure-u-1 pure-u-md-1-5"></div>
+    <div class="l-box pure-u-1 pure-u-md-3-5">
+        <h2 class="content-head is-center">{{ post.prop.get('title') }}</h2>
+        <p class='post-prop'>
+            {{ post.prop.get('create_time') }} | author: {{ post.prop.get('author') }}  | {{ post.prop.get('tags') }} 
+        </p>
+        {{ post.content.get('html')|safe }}
+        {% if 'username' in session %}<div>
+        <a href='/post/delete/{{ post.key }}'>Delete</a>
+        </div>{% endif %}
+    </div>
+<div class="l-box pure-u-1 pure-u-md-1-5"></div>
+</div>
+{% endblock %}

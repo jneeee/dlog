@@ -4,7 +4,7 @@ from flask import Flask, render_template
 
 from views.user import user
 from views.post import post
-
+from views.object.post import Post
 
 app = Flask(__name__)
 app.secret_key = getenv('DETA_PROJECT_KEY')
@@ -15,7 +15,9 @@ app.register_blueprint(post.bp_post)
 
 @app.route('/', methods=["GET"])
 def index():
-    return render_template('index.html')
+    # res: {count:num, last:xx, items:[{}, ]}
+    res = Post.fetch_posts()
+    return render_template('index.html', items=res.items)
 
 @app.errorhandler(404)
 def page_not_found(error):

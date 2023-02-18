@@ -9,6 +9,7 @@ User in DB:
         'html': xxxx
     }
 '''
+import time
 import markdown
 from random import randint
 
@@ -29,6 +30,7 @@ class Post:
                 'tags': [i.strip() for i in forms.get('tags').split(',')],
                 'title': forms.get('title'),
                 'author': author_name,
+                'create_time': time.ctime(time.time()),
             }
             self.content = {
                 'raw': forms.get('content'),
@@ -40,21 +42,25 @@ class Post:
         item = {
             'key': self.key,
             'type': 'post',
-            'prop': {
-                'author': self.author,
-                'title': self.title,
-                'tags': self.tags,
-            },
-            'content': {
-                'pure': self.content,
-                'html': self.content_html,
-            }
+            'prop': self.prop,
+            'content': self.content,
         }
         db.put(item)
 
     @classmethod
-    def get_post_info_by_key(cls, key: str):
+    def get_post_inst_by_key(cls, key: str):
         item = db.get(key)
         if not item:
             raise ValueError('No such key!')
         return cls(item, from_db=True)
+
+    @staticmethod
+    @async_exc
+    def delete_post_by_key(key: str):
+        item = db.delete(key)
+
+    @staticmethod
+    def fetch_posts(limit=10, last=None):
+        filte = {'key?pfx': 'post_'}
+        res = db.fetch(filte, limit=limit)
+        return res
