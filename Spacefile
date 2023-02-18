@@ -11,3 +11,6 @@ micros:
         - name: FLASK_DEBUG
           description: Enable flask debug mod
           default: "True"
+        - name: ALLOW_REGISTER
+          description: Enable flask debug mod
+          default: "True"

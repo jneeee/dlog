@@ -16,7 +16,7 @@ def post():
         ins = Post(request.form,
                    author_name=session.get('username'))
         ins.save()
-        flash(f'Create post success: {ins.key}')
+        flash(f'Create post success: {ins.key}', 'message')
         return render_template('post.html')
 
 @bp_post.route("/<post_id>", methods=["GET"])
@@ -31,6 +31,6 @@ def post_detail(post_id):
 @login_required
 def post_delete(post_id):
     Post.delete_post_by_key(post_id)
-    flash(f'Delete post success: {post_id}')
+    flash(f'Delete post success: {post_id}', 'message')
 
     return render_template('post.html')

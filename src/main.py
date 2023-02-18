@@ -40,7 +40,7 @@ def setup():
         if not app.config['site_info']:
             return render_template('setup.html')
         else:
-            flash('Site info has been completed! You can change change them in deta base or install a new app')
+            flash('Site info has been completed! You can change change them in deta base or install a new app', 'warning')
             return redirect(url_for('index'))
     elif request.method == 'POST':
         form = request.form
@@ -51,5 +51,5 @@ def setup():
         }
         db.put(item, 'site_info')
         app.config['site_info'] = item
-        flash('Site info complite!')
+        flash('Site info complite!', 'message')
         return redirect(url_for('index'))

@@ -7,7 +7,6 @@
         <title>{{ config['site_info'].get('site_title') }}</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/grids-responsive-min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="/static/css/styles.css">
     </head>
     <body>
@@ -20,7 +19,7 @@
             <div class="pure-u-1 pure-u-md-1-3">
                 <div class="pure-menu pure-menu-horizontal custom-can-transform">
                     <ul class="pure-menu-list">
-                        <li class="pure-menu-item"><a href="/" class="pure-menu-link"><i class="fa fa-home" aria-hidden="true"></i>Home</a></li>
+                        <li class="pure-menu-item"><a href="/" class="pure-menu-link">Home</a></li>
                     </ul>
                 </div>
             </div>
@@ -28,10 +27,11 @@
                 <div class="pure-menu pure-menu-horizontal custom-menu-3 custom-can-transform">
                     <ul class="pure-menu-list">
                         {% if 'username' in session %}
-                        <li class="pure-menu-item"><a href="/post/new" class="pure-menu-link"><i class="fa fa-plus" aria-hidden="true"></i>New post</a></li>
-                        <li class="pure-menu-item">{{ session['username'] }}</li>
+                        <li class="pure-menu-item"><a href="/post/new" class="pure-menu-link">➕New post</a></li>
+                        <li class="pure-menu-item">👤{{ session['username'] }}</li>
                         <li class="pure-menu-item"><a href="/user/logout" class="pure-menu-link">Logout</a></li>
                         {% else %}
+                        <li class="pure-menu-item"><a href="/user/register" class="pure-menu-link">Register</a></li>
                         <li class="pure-menu-item"><a href="/user/login" class="pure-menu-link">Login</a></li>
                         {% endif %}
                     </ul>
@@ -39,19 +39,17 @@
             </div>
         </div>
         <div class="content">
-            <center>{% with messages = get_flashed_messages() %}
+            <center>{% with messages = get_flashed_messages(with_categories=true) %}
                 {% if messages %}
-                  <ul class=flashes>
-                  {% for message in messages %}
-                    <li>{{ message }}</li>
+                  {% for category, message in messages %}
+                      <div class="alert alert-{{ category }}">{{ message }}</div>
                   {% endfor %}
-                  </ul>
                 {% endif %}
               {% endwith %}</center>
             {% block content %}{% endblock %}
         </div>
         <div class="footer">
-            Copyright {{ config['site_info'].get('site_title') }}.
+            ©️ {{ config['site_info'].get('site_title') }}.
         </div>
     </body>
 <script>
