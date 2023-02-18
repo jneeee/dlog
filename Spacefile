@@ -5,9 +5,14 @@ micros:
   - name: deta
     src: ./src
     engine: python3.9
-    primary: false
+    primary: true
+    public_routes:
+      - '/*'
     presets:
       env:
         - name: FLASK_DEBUG
+          description: Enable flask debug mod
+          default: "True"
+        - name: ALLOW_REGISTER
           description: Enable flask debug mod
           default: "True"
