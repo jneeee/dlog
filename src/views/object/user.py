@@ -1,6 +1,6 @@
 '''
 User in DB:
-    {'key': user_asdasd, 
+    {'key': user_<username>, 
     'name': asdasd, 'passwd':xxx, 'uuid':xxxx, 
     'prop':{
         register_time: xxxx

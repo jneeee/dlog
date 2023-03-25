@@ -1,14 +1,14 @@
 ---
-title: "Dlog: A dream blog app"
-tagline: "A dream blog by Micros and Deta Base. made with python flask"
+title: "Dreamlog: A Simple blog app"
+tagline: "A Simple blog by Micros and Deta Base. made with python flask"
 theme_color: "#BDDDF3"
 git: "https://github.com/jneeee/dlog"
 homepage: "https://deta.space/discovery/@jneeee/dreamlog"
 ---
 
-## Dlog: dream blog app
+## dreamlog: a simple blog app
 
-A dream blog by Micros and Deta Base
+A blog by Micros and Deta Base
 
 
 - Install the app in https://deta.space/discovery
@@ -16,4 +16,5 @@ A dream blog by Micros and Deta Base
 - Register the user and now you can create posts.
 - In order to prohibite register new user, Set the **Environment Variables** 'ALLOW_REGISTER' to 'False' in project config page
 
+example site: https://dreamlog-1-a9240139.deta.app/
 

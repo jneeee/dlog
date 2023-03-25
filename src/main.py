@@ -20,19 +20,20 @@ def index():
     if not app.config['site_info']:
         return redirect(url_for('setup'))
 
-    # res: {count:num, last:xx, items:[{}, ]}
-    res = Post.fetch_posts()
-    return render_template('index.html', items=res.items)
+    items = Post.fetch_posts()
+    return render_template('index.html', items=items)
+
 
 @app.errorhandler(404)
 def page_not_found(error):
     return render_template('page_not_found.html'), 404
 
+
 @app.route('/tags/<tag>', methods=["GET"])
 def tags(tag):
-    # res: {count:num, last:xx, items:[{}, ]}
-    res = Post.fetch_by_tag(tag)
-    return render_template('index.html', items=res.items)
+    items = Post.fetch_by_tag(tag)
+    return render_template('index.html', items=items)
+
 
 @app.route('/setup', methods=["GET", "POST"])
 def setup():

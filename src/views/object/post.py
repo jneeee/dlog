@@ -1,11 +1,14 @@
 '''
-User in DB:
-    {'key': post_<id>,
+Post in DB:
+    {'key': post_<id>, # id: random long int
     'prop':{
-        'author': asdasd, 'title':xxx, 'tags':xxxx,
+        'author': <username>,
+        'title': xxx,
+        'tags': [xx,],
+        'create_time': ,
     }
     'content':{
-        'raw': xxxx
+        'raw': xxxx # the markdown file
         'html': xxxx
     }
 '''
@@ -61,12 +64,34 @@ class Post:
 
     @staticmethod
     def fetch_posts(limit=10, last=None):
+        '''Get posts list
+        
+        :return: [] if have no posts, else [{posts.__dict__}, ]
+        '''
         filte = {'key?pfx': 'post_'}
         res = db.fetch(filte, limit=limit, last=last)
-        return res
+        items = []
+        if res.count:
+            items = sorted(
+                res.items, 
+                key=lambda i: i.get('prop', {}).get('create_time'),
+                reverse=True,
+            )
+        return items
 
     @staticmethod
     def fetch_by_tag(tag, limit=1000, last=None):
+        '''Get posts list(filter by tag)
+
+        :return: [] if have no posts, else [{posts.__dict__}, ]
+        '''
         filte = {'prop.tags?contains': tag}
         res = db.fetch(filte, limit=limit, last=last)
-        return res
+        items = []
+        if res.count:
+            items = sorted(
+                res.items, 
+                key=lambda i: i.get('prop', {}).get('create_time'),
+                reverse=True,
+            )
+        return items

@@ -1,13 +1,10 @@
 {% extends "layout.html" %}
 {% block content %}
-<div class="pure-g">
-    <div class="pure-u-1 pure-u-md-1-5"></div>
-    <div class="pure-u-1 pure-u-md-3-5">
 <h4>Recent posts</h4>
-        <ul>{% for i in items %}
-            <li>{{ i.get('prop').get('create_time') }} | <a href='/post/{{i.get("key")}}'>{{ i.get('prop').get('title') }}</a> {% for tag in i.get('prop').get('tags') %}<a href='/tags/{{tag}}'>🏷️{{ tag }}</a> {% endfor %}</li>
-        {% endfor %}</ul>
-    </div>
-<div class="pure-u-1 pure-u-md-1-5"></div>
+<div>
+    <ul>{% for i in items %}
+    <li>{{ i.get('prop').get('create_time') }} | <a href='/post/{{i.get("key")}}'>{{ i.get('prop').get('title') }}</a> 
+ {% for tag in i.get('prop').get('tags') %}<a href='/tags/{{tag}}'>🏷️{{ tag }}</a> {% endfor %}</li>
+{% endfor %}</ul>
 </div>
 {% endblock %}
